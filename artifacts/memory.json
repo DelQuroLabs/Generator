@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.2.0",
+  "project_slug": "delquro-generator",
+  "current_phase": "production-candidate",
+  "current_completion_label": "incomplete",
+  "accepted_core_outcome": "Generate explained, seeded names on-device and cryptographically random API-key material for user-owned applications.",
+  "last_turn_summary": "Added /api-keys with Web Crypto rejection sampling, formats, prefix, length, quantity, masked output, copy, plaintext download and clear. Linked from home. Removed conflicting X-Frame-Options and permitted Arena framing in CSP. npm run verify passed (38 tests); production preview restarted. Source ZIP requested.",
+  "next_actions": [
+    {
+      "id": "NEXT-001",
+      "action": "Complete real-browser smoke, E2E, accessibility, visual and performance checks."
+    },
+    {
+      "id": "NEXT-002",
+      "action": "Resolve prior dependency findings and finish full master-prompt record validation and charter."
+    }
+  ],
+  "open_items": [
+    {
+      "id": "SEC-OPEN",
+      "summary": "Prior audit: 3 moderate / 9 high findings unresolved; full security scan not rerun after API-key addition."
+    },
+    {
+      "id": "RECORDS-OPEN",
+      "summary": "Earlier compliance records are incomplete; no release-ready claim or human waiver."
+    }
+  ],
+  "preferences": {
+    "design": "Mobile first",
+    "delivery": "Updated project ZIP and running preview"
+  },
+  "decisions": [
+    {
+      "id": "KEYS-001",
+      "summary": "Keys use Web Crypto only, never seeded name PRNG. No persistence or third-party credentials.",
+      "source_path": "docs/api-key-generator.md"
+    }
+  ],
+  "turn_log": [
+    {
+      "at": "2026-10-03T12:36:14.535991+00:00",
+      "user_message_brief": "add api key generators too. zip too",
+      "actions_taken": [
+        "Added API key generator and 9 tests",
+        "npm run verify",
+        "Restarted production preview",
+        "Prepared source ZIP"
+      ],
+      "outcomes": [
+        "Typecheck, lint, 38 tests and production build passed",
+        "HTTP API-key page and health endpoint passed"
+      ],
+      "unresolved": [
+        "Real-browser gates",
+        "Previous dependency findings",
+        "Full master-prompt compliance pass"
+      ]
+    }
+  ]
+}

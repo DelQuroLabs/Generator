@@ -1,0 +1,10 @@
+=== client bundle scan (SEC-001) ===
+Patterns scanned: sk_live_, pk_live_, rk_live_, AKIA[0-9A-Z]{16}, ghp_, github_pat_, xox[baprs]-, Bearer eyJ, AIza[0-9A-Za-z_-]{35}, -----BEGIN
+
+--- matches in .next/static/ ---
+--- NEXT_PUBLIC_ env values in bundle (should contain nothing sensitive) ---
+
+--- source maps secret scan ---
+
+--- source code secret scan ---
+exit:0

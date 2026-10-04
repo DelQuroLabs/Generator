@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.2.0",
+  "captured_at": "2026-10-03T12:28:00Z",
+  "toolchains": [
+    {"name": "node", "version": "20.20.2"},
+    {"name": "npm", "version": "10.8.2"},
+    {"name": "git", "version": "2.47.3"},
+    {"name": "next", "version": "15.5.27"},
+    {"name": "react", "version": "19.2.8"},
+    {"name": "typescript", "version": "6.0.3"},
+    {"name": "tailwindcss", "version": "4.3.3"},
+    {"name": "vitest", "version": "4.1.10"},
+    {"name": "jsdom", "version": "24.1.3"},
+    {"name": "eslint", "version": "9.30.1"},
+    {"name": "zod", "version": "4.4.3"},
+    {"name": "idb-keyval", "version": "6.3.0"}
+  ],
+  "devices": ["linux-x86_64-sandbox"],
+  "browsers": [],
+  "network_reachability": "partial",
+  "secret_manager": "unavailable",
+  "hosting_account": "not-applicable",
+  "notes": "Arena.ai sandbox. No browser engine installed (chromium/firefox/webkit absent) → SMOKE-001, E2E-001, A11Y-001 (keyboard+SR portion), VISUAL-001, PERF-001 are all capability-blocked at production-candidate. HTTP-level smoke achievable via curl against the production build on 0.0.0.0:3000. Network is partial — the npm registry is reachable but no outbound app traffic is attempted. No managed secret manager; .env.example only contains a public NEXT_PUBLIC_APP_URL. Publishing_intent=local-preview, so hosting_account not-applicable."
+}

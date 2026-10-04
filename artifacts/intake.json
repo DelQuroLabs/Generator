@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.2.0",
+  "core_outcome": "A user enters a naming brief (type, field, origin, style, length, phonetics) and sees a scored, explained list of candidate names reproducible from a seed — all computed on-device.",
+  "platforms": ["browser-web"],
+  "browser_matrix": [
+    "chromium-latest (declared, verified via sandbox proxy preview only)",
+    "firefox-latest (declared, no browser runner available in sandbox)",
+    "safari-latest (declared, no browser runner available in sandbox)",
+    "mobile-safari-latest (declared, mobile-first UI; no device runner available)"
+  ],
+  "connectivity": "offline-capable",
+  "data_identity": "local-only",
+  "publishing_intent": "local-preview",
+  "publisher_entity": "DelQuro Labs",
+  "publisher_jurisdiction": "US",
+  "cost_ceiling": "$0/month — no paid service, API, domain, or hosting tier authorized",
+  "resolved_at": "2026-10-03T12:28:00Z"
+}

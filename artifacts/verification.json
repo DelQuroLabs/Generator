@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.2.0",
+  "target": "linux-x86_64 sandbox + Next.js production build served on 0.0.0.0:3000",
+  "phase": "production-candidate",
+  "hash_exclusions": ["node_modules/**", ".next/**", ".npm/**", ".git/**", "artifacts/evidence/**", "uploads/**", "tsconfig.tsbuildinfo"],
+  "gates": [
+    {
+      "id": "INSTALL-001",
+      "command": "npm ci --no-audit --no-fund",
+      "target": "host",
+      "result": "passed",
+      "required_for_phase": true,
+      "started_at": "2026-10-03T12:23:55Z",
+      "finished_at": "2026-10-03T12:24:11Z",
+      "evidence": "artifacts/evidence/install.log (frozen-lockfile install, 451 → 452 packages after next@15.5.27 bump, 0 install errors)",
+      "source_revision": "workspace-sha256:f70b4129718770b8d522541c2363103adc8c4f763d232406118300f96a692e2c",
+      "tool_versions": {"node": "20.20.2", "npm": "10.8.2"},
+      "environment": {"os": "linux 6.1.158+ x86_64", "device_or_runner": "arena-sandbox"},
+      "inputs": [
+        {"path": "package.json", "sha256": "2abaabf39406d551f4eec41c50fe12803eb8f734c18f060bf7ccabbcff899f0b"},
+        {"path": "package-lock.json", "sha256": "7c56a2c9708513d8aa653ba2f27f9549d04256b71ec7995ec056225021182d96"}
+      ],
+      "redaction": "none",
+      "notes": "POL-DEPS-012 / U-02 satisfied: frozen-lockfile install with integrity verification; lockfile and manifest in sync."
+    },
+    {
+      "id": "DOCTOR-001",
+      "result": "not-applicable",
+      "reason": "Next.js does not ship a `next doctor` command in v15; `next info` is diagnostic-only and does not define pass/fail. No doctor-equivalent is required for this stack."
+    },
+    {
+      "id": "TYPECHECK-001",
+      "command": "./node_modules/.bin/tsc --noEmit",
+      "target": "host",
+      "result": "passed",
+      "required_for_phase": true,
+      "started_at": "2026-10-03T12:27:21Z",
+      "finished_at": "2026-10-03T12:27:28Z",
+      "evidence": "artifacts/evidence/typecheck.log (exit 0, 0 TS errors; strict + noUncheckedIndexedAccess)",
+      "source_revision": "workspace-sha256:f70b4129718770b8d522541c2363103adc8c4f763d232406118300f96a692e2c",
+      "tool_versions": {"node": "20.20.2", "typescript": "6.0.3"},
+      "environment": {"os": "linux 6.1.158+ x86_64", "device_or_runner": "arena-sandbox"},
+      "inputs": [
+        {"path": "tsconfig.json", "sha256": "1be0fe32bbca12b48ae4524a7e339228ff9efb028656b0907d49d9b5b261c7ff"}
+      ],
+      "redaction": "none"
+    },
+    {
+      "id": "LINT-001",
+      "command": "./node_modules/.bin/eslint .",
+      "target": "host",
+      "result": "passed",
+      "required_for_phase": true,
+      "started_at": "2026-10-03T12:27:28Z",
+      "finished_at": "2026-10-03T12:27:31Z",
+      "evidence": "artifacts/evidence/lint.log (exit 0, 0 errors, 0 warnings)",
+      "source_revision": "workspace-sha256:f70b4129718770b8d522541c2363103adc8c4f763d232406118300f96a692e2c",
+      "tool_versions": {"node": "20.20.2", "eslint": "9.30.1", "eslint-config-next": "15.5.27"},
+      "environment": {"os": "linux 6.1.158+ x86_64", "device_or_runner": "arena-sandbox"},
+      "inputs": [
+        {"path": "eslint.config.mjs", "sha256": "2c4036c7d51ce8834f4d5757e37674afe3a2bd5d32442b05bb1f249c079bdba9"}
+      ],
+      "redaction": "none"
+    },
+    {
+      "id": "UNIT-001",
+      "command": "./node_modules/.bin/vitest run",
+      "target": "host",
+      "result": "passed",
+      "required_for_phase": true,
+      "started_at": "2026-10-03T12:27:31Z",
+      "finished_at": "2026-10-03T12:27:34Z",
+      "evidence": "artifacts/evidence/unit.log (29/29 passed across __tests__/engine.test.ts [21] + __tests__/components.test.tsx [8])",
+      "source_revision": "workspace-sha256:f70b4129718770b8d522541c2363103adc8c4f763d232406118300f96a692e2c",
+      "tool_versions": {"node": "20.20.2", "vitest": "4.1.10", "jsdom": "24.1.3", "@testing-library/react": "16.3.2"},
+      "environment": {"os": "linux 6.1.158+ x86_64", "device_or_runner": "arena-sandbox-jsdom"},
+      "inputs": [
+        {"path": "__tests__/engine.test.ts", "sha256": "94bceba1ea4a9e70d1e4d65643bd2c38e2e1813395a8ad7dc4f2fa37765f6362"},
+        {"path": "__tests__/components.test.tsx", "sha256": "0a8411e2c344dbe3eb548a5e3f07d3a3e6d05269652dbec8de33ed96258ac853"},
+        {"path": "vitest.config.ts", "sha256": "6b3c34d745d8e1a14aac2c69f60d3162442d553d127d61f8f76e25d5373ee877"}
+      ],
+      "redaction": "none",
+      "notes": "Covers REQ-001, REQ-002, REQ-006, REQ-007. Lexicon integrity + PRNG determinism + hard-constraint filters + XSS payload + CSV DDE sanitization are all unit-asserted."
+    },
+    {
+      "id": "COMPONENT-001",
+      "command": "./node_modules/.bin/vitest run __tests__/components.test.tsx",
+      "target": "host-jsdom",
+      "result": "passed",
+      "required_for_phase": true,
+      "started_at": "2026-10-03T12:27:31Z",
+      "finished_at": "2026-10-03T12:27:34Z",
+      "evidence": "artifacts/evidence/unit.log (8/8 component tests passed: form render + generate submit + NameCard render + breakdown expand + collapsible sections + id namespacing + Sheet open/Escape + Sheet closed)",
+      "source_revision": "workspace-sha256:f70b4129718770b8d522541c2363103adc8c4f763d232406118300f96a692e2c",
+      "tool_versions": {"node": "20.20.2", "vitest": "4.1.10", "jsdom": "24.1.3", "@testing-library/react": "16.3.2", "@testing-library/jest-dom": "7.0.0"},
+      "environment": {"os": "linux 6.1.158+ x86_64", "device_or_runner": "arena-sandbox-jsdom"},
+      "inputs": [
+        {"path": "__tests__/components.test.tsx", "sha256": "0a8411e2c344dbe3eb548a5e3f07d3a3e6d05269652dbec8de33ed96258ac853"}
+      ],
+      "redaction": "none",
+      "notes": "Fidelity: jsdom is not a real browser. Covers REQ-003, REQ-004, REQ-005, REQ-007 structurally. Real-browser evidence lives under SMOKE-001/E2E-001 (both blocked in this sandbox)."
+    },
+    {
+      "id": "BUILD-001",
+      "command": "./node_modules/.bin/next build",
+      "target": "host",
+      "result": "passed",
+      "required_for_phase": true,
+      "started_at": "2026-10-03T12:27:34Z",
+      "finished_at": "2026-10-03T12:28:15Z",
+      "evidence": "artifacts/evidence/build.log (exit 0; routes: / 40.4 kB · First Load JS 143 kB; /_not-found 133 B; /api/health 133 B dynamic; /robots.txt 133 B; /sitemap.xml 133 B; shared 103 kB)",
+      "source_revision": "workspace-sha256:f70b4129718770b8d522541c2363103adc8c4f763d232406118300f96a692e2c",
+      "tool_versions": {"node": "20.20.2", "next": "15.5.27"},
+      "environment": {"os": "linux 6.1.158+ x86_64", "device_or_runner": "arena-sandbox"},
+      "inputs": [
+        {"path": "next.config.mjs", "sha256": "2b400b6c26acbd08900392d205339f29131f990f2ab6926f314e913a26565f55"},
+        {"path": "package.json", "sha256": "2abaabf39406d551f4eec41c50fe12803eb8f734c18f060bf7ccabbcff899f0b"}
+      ],
+      "redaction": "none"
+    },
+    {
+      "id": "SMOKE-001",
+      "command": "curl -sI http://localhost:3000/ ; curl -sf http://localhost:3000/api/health ; curl -s -o /tmp/home.html http://localhost:3000/",
+      "target": "host-production-build (HTTP smoke; not a browser)",
+      "result": "blocked",
+      "required_for_phase": true,
+      "reason": "Required gate per §5.1 for production-candidate must run against the declared browser matrix (chromium/firefox/safari) on the production build. No browser engine is installed in this sandbox (`artifacts/capabilities.json.browsers = []`). HTTP-layer smoke against the production build (`next start`) does pass (HTTP 200 on / and /api/health; headers present; home contains 'DelQuro Generator', 'bottom-bar', 'viewport-fit=cover') and is recorded as the compensating control — but it is NOT browser evidence and is NOT a pass. Evidence: artifacts/evidence/smoke-headers.log, smoke-health.log, smoke-home.log, smoke-404.log, smoke-robots.log, smoke-sitemap.log.",
+      "notes": "This is the honest downgrade from a prior report that labeled smoke `passed` on curl alone."
+    },
+    {
+      "id": "E2E-001",
+      "command": "n/a — Playwright/Cypress not installed",
+      "target": "declared browser matrix",
+      "result": "blocked",
+      "required_for_phase": true,
+      "reason": "No browser runner (Playwright/Cypress/WebdriverIO) binary available in sandbox; chromium/firefox/webkit absent. Compensating control: §10.1 register entry — manual static review of app/page.tsx state machine + Sheet focus-trap + Dialog alertdialog semantics (reviewer: @unknown, 2026-10-03)."
+    },
+    {
+      "id": "PERF-001",
+      "command": "n/a — Lighthouse not available",
+      "target": "declared browser matrix",
+      "result": "blocked",
+      "required_for_phase": true,
+      "reason": "No Lighthouse / browser cold-load tooling in sandbox. Server-side home response measured as 32,795 bytes in ~3ms via curl (artifacts/evidence/smoke-home.log); that is a server-render number only — not a real browser cold-page-load figure (no network, no parse, no hydrate). Internal measurement: 50-name generation in ~11 ms (recorded in docs/verification.md); synthetic, not real-user."
+    },
+    {
+      "id": "A11Y-001",
+      "command": "n/a — axe-core / browser not available",
+      "target": "declared browser matrix",
+      "result": "blocked",
+      "required_for_phase": true,
+      "reason": "Automated axe-core scan requires a browser engine; keyboard-pass and screen-reader (NVDA/JAWS/VoiceOver) evidence require a real browser + AT. All absent in sandbox. Compensating control: §10.1 register — static code review of globals.css (focus-visible outline, prefers-reduced-motion, 48/40/44 target sizes, 16px inputs to prevent iOS Safari zoom, 100svh/dvh, safe-area aware) + Dialog/Sheet focus-trap (role=dialog, aria-modal, Escape close, Tab trap, previouslyFocused restore) + component tests covering role=alertdialog / Escape close (reviewer: @unknown, 2026-10-03)."
+    },
+    {
+      "id": "VISUAL-001",
+      "command": "n/a — headless browser not available",
+      "target": "320/768/1280 CSS px viewports; light/dark; reduced motion",
+      "result": "blocked",
+      "required_for_phase": true,
+      "reason": "No headless browser for viewport-matrix screenshots. Compensating control: §10.1 register — static review of mobile-first CSS (lg: enhancement, bottom-bar below lg, bottom-sheet below lg, hscroll bleed rows, collapsible sections) + per-scheme themeColor + prefers-reduced-motion rule in app/globals.css (reviewer: @unknown, 2026-10-03)."
+    },
+    {
+      "id": "SEC-001",
+      "command": "secret scan + client-bundle scan + headers/CSP review + CSRF review + rate-limit review + npm audit",
+      "target": "host + shipped bundle",
+      "result": "passed",
+      "required_for_phase": true,
+      "started_at": "2026-10-03T12:26:00Z",
+      "finished_at": "2026-10-03T12:28:30Z",
+      "evidence": "artifacts/evidence/sec-client-bundle.log (bundle grep, 0 secret matches), artifacts/evidence/sec-advisories.log (npm audit: 0 critical / 9 high / 3 moderate — all transitive build/dev deps, documented accepted; see artifacts/security.json), artifacts/evidence/headers-home.log + headers-health.log (CSP, XCTO, Referrer-Policy, Permissions-Policy, COOP, CORP, X-Frame-Options, HSTS all present; X-Powered-By removed)",
+      "source_revision": "workspace-sha256:f70b4129718770b8d522541c2363103adc8c4f763d232406118300f96a692e2c",
+      "tool_versions": {"node": "20.20.2", "npm": "10.8.2", "next": "15.5.27"},
+      "environment": {"os": "linux 6.1.158+ x86_64", "device_or_runner": "arena-sandbox"},
+      "inputs": [
+        {"path": "next.config.mjs", "sha256": "2b400b6c26acbd08900392d205339f29131f990f2ab6926f314e913a26565f55"},
+        {"path": "package-lock.json", "sha256": "7c56a2c9708513d8aa653ba2f27f9549d04256b71ec7995ec056225021182d96"}
+      ],
+      "redaction": "none",
+      "notes": "POL-ADVISORY-028: scanner (`npm audit`) ran and recorded — not silently clean. CSRF/rate-limiting: not-applicable (local-only, no auth, no state-changing endpoints). Secret-scan: no dedicated tool (trufflehog/gitleaks/detect-secrets) in sandbox; compensating control = pattern grep over source + bundle (U-05/U-02-aligned). Bumping next 15.5.23 → 15.5.27 this turn closed the sole runtime-critical (RCE on Windows + AVIF image-opt RCE) — not reachable in our target (Linux + no image pipeline), but patched regardless."
+    },
+    {
+      "id": "CAPSULE-001",
+      "command": "n/a — pack/verify scripts not yet in repo",
+      "target": "host",
+      "result": "blocked",
+      "required_for_phase": true,
+      "reason": "scripts/pack-workspace-capsule.py and scripts/verify-capsule.py are specified by the master script (§8) but not yet included in this project. Not required until handoff. When added: pack → verify → unpack-to-temp → hash-compare → secret-scan with hard caps (5000 entries / 64 MB total / 8 MB per file / 1 MB per manifest)."
+    },
+    {
+      "id": "STORE-001",
+      "result": "not-applicable",
+      "reason": "publishing_intent=local-preview; the app is not distributed through an extension store or store-listed PWA directory. Required only before a Class D extension-store submission."
+    }
+  ]
+}

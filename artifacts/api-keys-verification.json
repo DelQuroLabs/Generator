@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-03T12:36:14.535991+00:00",
+  "feature": "api-key-generator",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "unit-and-component": "passed",
+    "production-build": "passed",
+    "http-smoke": "passed",
+    "real-browser": "not-run",
+    "fresh-security-audit": "not-run"
+  },
+  "tests": 38,
+  "evidence": "artifacts/evidence/api-keys-verify.log",
+  "completion_label": "incomplete"
+}
